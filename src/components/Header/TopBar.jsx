@@ -16,7 +16,7 @@ const TopBar = () => {
     <div className={`transition-all duration-500 relative z-51 ${
       scrolled 
         ? 'bg-white border-b border-gray-50  ' 
-        : 'bg-transparent  '
+        : 'bg-transparent  border-b border-transparent '
     } py-2.5`}>
       <div className="max-w-7xl mx-auto px-4 flex justify-between items-center text-sm">
         {/* Left Side: Contact Info */}

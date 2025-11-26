@@ -89,8 +89,8 @@ const Header = () => {
           {/* Logo Section (Left Side) */}
           <div className="flex items-center group cursor-pointer mr-8 z-50">
             <div className="relative flex items-center justify-center rounded-xl mr-3 w-12 h-12 transition-all duration-300">
-              <div className={`absolute inset-0 rounded-xl  transition duration-300 opacity-90 border border-white/10 ${scrolled ? 'bg-white' : 'bg-slate-950'}`}></div>
-              <GraduationCap className={`relative z-10 w-7 h-7 ${scrolled ? 'text-amber-500' : 'text-white'}`} />
+              <div className={`absolute inset-0 rounded-xl  transition duration-300 opacity-90 border border-white/10 ${scrolled ? 'bg-amber-400' : 'bg-slate-950'}`}></div>
+              <GraduationCap className={`relative z-10 w-7 h-7 ${scrolled ? 'text-slate-900' : 'text-white'}`} />
             </div>
             <div className="flex flex-col">
               <h1 className={`font-bold tracking-tight leading-none group-hover:text-amber-500 transition-all duration-300 text-2xl mb-1 ${logoColor}`}>EduPrime</h1>
@@ -126,7 +126,7 @@ const Header = () => {
                       <ChevronDown
                         className={`ml-1.5 flex items-center justify-center rounded-full mt-0.5
       w-4 h-4 transform transition-transform duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)]
-      ${activeDropdown === item.label ? 'rotate-180 text-white bg-amber-400 ' : 'text-slate-400 bg-white/20'}
+      ${activeDropdown === item.label ? 'rotate-180 text-white bg-amber-400 border-transparent ' : 'text-slate-400 bg-white/20 border border-white/40'}
     `}
                       />
                     </button>
@@ -170,7 +170,7 @@ const Header = () => {
             </nav>
 
             {/* Separator */}
-            <div className={`h-8 w-px mx-2 transition-colors duration-300 ${scrolled ? 'bg-slate-400' : 'bg-white/50'}`}></div>
+            <div className={`h-8 w-px mx-2 transition-colors duration-300 ${scrolled ? 'bg-slate-200' : 'bg-white/20'}`}></div>
 
             {/* Action Buttons */}
             <div className="flex items-center space-x-4 ml-6">

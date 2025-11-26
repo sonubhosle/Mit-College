@@ -118,7 +118,7 @@ const Hero  = () => {
                <div className={`transform transition-all duration-1000 delay-500 ease-[cubic-bezier(0.25,1,0.5,1)] ${
                  isActive ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'
                }`}>
-                 <p className="text-xl text-slate-300 mb-12 leading-relaxed max-w-2xl border-l-4 border-amber-500 pl-6 backdrop-blur-sm bg-slate-900/10 py-2 rounded-r-lg">
+                 <p className="text-xl text-slate-300 mb-12 leading-relaxed max-w-2xl border-l-4 border-amber-500 pl-6  py-2 rounded-r-lg">
                    {slide.description}
                  </p>
                </div>
