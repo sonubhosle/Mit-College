@@ -67,7 +67,7 @@ const SectionHeading = ({
         </h2>
       </div>
 
-      <div className={`h-1.5 bg-linear-to-r from-amber-400 to-amber-600 rounded-full mb-8 transition-all duration-1000 delay-200 ease-out transform ${lineAlignmentClasses[align]} ${isVisible ? 'w-24 opacity-100 scale-100' : 'w-0 opacity-0 scale-50'}`}></div>
+      <div className={`h-1.5 bg-linear-to-r from-amber-400 to-amber-600 rounded-full mb-4 transition-all duration-1000 delay-200 ease-out transform ${lineAlignmentClasses[align]} ${isVisible ? 'w-24 opacity-100 scale-100' : 'w-0 opacity-0 scale-50'}`}></div>
       
       {description && (
         <div className={`transition-all duration-700 delay-300 ease-out transform ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>

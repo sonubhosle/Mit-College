@@ -4,11 +4,10 @@ export const MENU_ITEMS = [
   {
     label: 'Courses',
     children: [
-      { label: 'Computer Science', href: '#' },
-      { label: 'Business Administration', href: '#' },
-      { label: 'Engineering', href: '#' },
-      { label: 'Medicine', href: '#' },
-      { label: 'Arts & Humanities', href: '#' },
+      { label: 'B.Sc (Computer Science)', href: '#' },
+      { label: 'BCA ', href: '#' },
+      { label: 'Web Development', href: '#' },
+      { label: 'Java Development', href: '#' },
     ]
   },
   { label: 'Admission', href: '#' },
@@ -18,10 +17,10 @@ export const MENU_ITEMS = [
   {
     label: 'Content',
     children: [
-      { label: 'Latest News', href: '#' },
-      { label: 'Events Calendar', href: '#' },
-      { label: 'Photo Gallery', href: '#' },
-      { label: 'Video Library', href: '#' },
+      { label: 'Syllabus', href: '#' },
+      { label: 'Notes', href: '#' },
+      { label: 'Queries', href: '#' },
+      { label: 'Addmission', href: '#' },
     ]
   },
  

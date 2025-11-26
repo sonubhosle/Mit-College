@@ -2,24 +2,23 @@ import React from 'react';
 import { Megaphone } from 'lucide-react';
 
 const UPDATES = [
-  "Admissions Open for 2024-2025: Apply before Oct 30",
-  "EduPrime Ranked #1 Innovation College by Global Education Summit",
-  "New Robotics & AI Lab Inauguration Ceremony on Friday",
-  "International Student Exchange Program Applications are Live",
-  "Congratulations to our Football Team for winning the National Championship!",
-  "Guest Lecture: 'Future of Tech' by Industry Leaders - Nov 12"
+  { text: "Admissions Open for 2024-2025: Apply before Oct 30", isNew: true },
+  { text: "EduPrime Ranked #1 Innovation College by Global Education Summit", isNew: false },
+  { text: "New Robotics & AI Lab Inauguration Ceremony on Friday", isNew: true },
+  { text: "International Student Exchange Program Applications are Live", isNew: true },
+  { text: "Congratulations to our Football Team for winning the National Championship!", isNew: false },
+  { text: "Guest Lecture: 'Future of Tech' by Industry Leaders - Nov 12", isNew: false }
 ];
 
-const Announcements= () => {
+const Announcements = () => {
   const loopedUpdates = [...UPDATES, ...UPDATES, ...UPDATES];
 
   return (
-    <div className="bg-slate-950 relative z-30  ">
-      <div className="max-w-7xl mx-auto">
+    <div className="bg-slate-950 border-t border-slate-800 ">
         <div className="flex items-stretch overflow-hidden">
           
           {/* Label Section with Arrow Effect */}
-          <div className="relative z-20 shrink-0 bg-amber-500 py-4 px-4 flex items-center justify-center shadow-[4px_0_24px_rgba(245,158,11,0.2)]">
+          <div className="relative z-20 shrink-0 bg-amber-500 py-4 px-6 flex items-center justify-center shadow-[4px_0_24px_rgba(245,158,11,0.2)]">
             <div className="flex items-center gap-3">
               <span className="relative flex h-3 w-3">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
@@ -32,7 +31,7 @@ const Announcements= () => {
           </div>
 
           {/* Icon Separator Area */}
-          <div className="relative z-10 shrink-0 w-12 bg-slate-900 flex items-center justify-center -skew-x-12 ml-2 border-l border-slate-800">
+          <div className="relative z-10 shrink-0 w-12 bg-slate-900 flex items-center justify-center -skew-x-12  border-l border-slate-800">
             <Megaphone className="w-4 h-4 text-amber-500 skew-x-12" />
           </div>
 
@@ -46,8 +45,15 @@ const Announcements= () => {
               {loopedUpdates.map((item, index) => (
                 <div key={index} className="flex items-center whitespace-nowrap px-8 group cursor-pointer">
                   <span className="w-1.5 h-1.5 rounded-full bg-slate-700 mr-4 group-hover:bg-amber-500 transition-colors duration-300"></span>
+                  
+                  {item.isNew && (
+                    <span className="mr-3 inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-bold bg-amber-500 text-white animate-pulse shadow-[0_0_10px_rgba(245,158,11,0.5)]">
+                      NEW
+                    </span>
+                  )}
+                  
                   <span className="text-sm font-medium text-slate-400 group-hover:text-amber-400 transition-colors duration-300 tracking-wide">
-                    {item}
+                    {item.text}
                   </span>
                 </div>
               ))}
@@ -56,7 +62,6 @@ const Announcements= () => {
           
         </div>
       </div>
-    </div>
   );
 };
 

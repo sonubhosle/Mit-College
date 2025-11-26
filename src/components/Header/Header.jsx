@@ -80,8 +80,8 @@ const Header = () => {
     <>
       <header
         className={`transition-all duration-500 ease-in-out  py-4 ${scrolled
-          ? 'bg-white  '
-          : 'bg-transparent '
+          ? 'bg-white  shadow-md'
+          : 'bg-transparent  '
           }`}
       >
         <div className="max-w-7xl mx-auto px-4 flex justify-between items-center relative">
@@ -146,7 +146,7 @@ const Header = () => {
                         : 'opacity-0 invisible scale-95 -translate-y-2'
                         } `}
                     >
-                      <div className="bg-white rounded-2xl shadow-[0_20px_40px_-15px_rgba(0,0,0,0.15)] border border-slate-100 overflow-hidden">
+                      <div className="bg-white rounded-xl shadow-[0_20px_40px_-15px_rgba(0,0,0,0.15)] border border-slate-100 overflow-hidden">
                         <div className="p-2 bg-white mt-1">
                           {item.children.map((child, idx) => (
                             <a
@@ -154,9 +154,7 @@ const Header = () => {
                               href={child.href}
                               className="flex items-center px-4 py-3 text-sm font-medium text-slate-600 hover:bg-amber-50 hover:text-amber-600 rounded-xl transition-all duration-200 group"
                             >
-                              <span className="w-8 h-8 rounded-lg bg-amber-100 text-amber-600 flex items-center justify-center mr-3 group-hover:bg-amber-500 group-hover:text-white transition-all duration-300">
-                                {idx + 1}
-                              </span>
+                            
                               <span className="flex-1">{child.label}</span>
                               <ArrowRight className="w-4 h-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 text-amber-500" />
                             </a>
