@@ -18,7 +18,7 @@ const Gallery = () => {
       <div className="absolute top-40 -left-20 w-[500px] h-[500px] bg-amber-500/5 rounded-full blur-[120px] mix-blend-multiply"></div>
       <div className="absolute bottom-20 -right-20 w-[500px] h-[500px] bg-blue-500/5 rounded-full blur-[120px] mix-blend-multiply"></div>
 
-      <div className="container mx-auto px-5">
+      <div className=" px-5">
 
         <SectionHeading
           subtitle="Memories"

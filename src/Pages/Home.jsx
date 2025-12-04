@@ -6,6 +6,7 @@ import About from './About'
 import Gallery from '../components/Gallary/Gallary'
 import Chatbot from '../components/Announcements/ChatBot/ChatBot'
 import Contact from './Contact'
+import Newsletter from '../components/NewsLetter/NewsLetter'
 
 const Home = () => {
   return (
@@ -17,6 +18,7 @@ const Home = () => {
         <Gallery />
         <Chatbot/>
         <Contact/>
+        <Newsletter/>
     </div>
   )
 }

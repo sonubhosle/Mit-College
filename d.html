@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+ 
+
+<style>
+/* Smooth slide opacity transitions */
+.slide {
+  transition: opacity 1s ease-in-out;
+}
+
+/* Smooth zoom animation */
+.slide-img {
+  transition: transform 8s linear;
+}
+</style>
+
+<div id="hero" class="relative bg-slate-900 overflow-hidden h-[680px] flex items-center">
+
+  <!-- Slides -->
+  <div id="slides-container"></div>
+
+  <!-- Text Content -->
+  <div class="relative z-20  px-4 w-full pt-30" id="content-container"></div>
+
+  <!-- Navigation -->
+  <div class="absolute bottom-12 left-0 right-0 z-30 px-4">
+    <div class=" flex items-center justify-end">
+      <div class="flex gap-3">
+        <button id="prevBtn"
+          class="p-3 rounded-full border border-white/10 text-white bg-white/5 backdrop-blur-md hover:bg-amber-500 hover:border-amber-500 transition-all active:scale-95">
+          <i data-lucide="chevron-left" class="w-6 h-6"></i>
+        </button>
+
+        <button id="nextBtn"
+          class="p-3 rounded-full border border-white/10 text-white bg-white/5 backdrop-blur-md hover:bg-amber-500 hover:border-amber-500 transition-all active:scale-95">
+          <i data-lucide="chevron-right" class="w-6 h-6"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// ------------------ SLIDE DATA ------------------
+const SLIDES = [
+  {
+    id: 1,
+    image: "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=2070&q=80",
+    subtitle: "Welcome to EduPrime College",
+    title: "Shape Your",
+    highlight: "Bright Future",
+    description:
+      "Discover a world of knowledge, innovation, and community. Our world-class programs and dedicated faculty are here to help you achieve your dreams.",
+  },
+  {
+    id: 2,
+    image: "https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=2086&q=80",
+    subtitle: "Excellence in Education",
+    title: "Innovate &",
+    highlight: "Inspire",
+    description:
+      "Join a vibrant community of scholars and changemakers. Experience learning that goes beyond the classroom with our practical approach.",
+  },
+  {
+    id: 3,
+    image: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=2070&q=80",
+    subtitle: "World Class Facilities",
+    title: "Empowering",
+    highlight: "Leaders",
+    description:
+      "State-of-the-art labs, modern libraries, and recreational centers designed to foster your growth, creativity, and academic success.",
+  },
+];
+
+let currentSlide = 0;
+let isAutoPlaying = true;
+
+const slidesContainer = document.getElementById("slides-container");
+const contentContainer = document.getElementById("content-container");
+
+// ------------------ RENDER SLIDES ------------------
+function renderSlides() {
+  SLIDES.forEach((slide, index) => {
+    const slideDiv = document.createElement("div");
+    slideDiv.className = `slide absolute inset-0 ${index === 0 ? "opacity-100 z-10" : "opacity-0 z-0"}`;
+
+    slideDiv.innerHTML = `
+      <img src="${slide.image}" class="slide-img w-full h-full object-cover ${index === 0 ? "scale-110" : "scale-100"}" />
+      <div class="absolute inset-0 bg-slate-900/40 bg-blend-multiply"></div>
+      <div class="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-900/80 to-transparent"></div>
+    `;
+
+    slidesContainer.appendChild(slideDiv);
+  });
+
+  renderSlideContent();
+}
+
+// ------------------ RENDER TEXT CONTENT ------------------
+function renderSlideContent() {
+  contentContainer.innerHTML = "";
+
+  SLIDES.forEach((slide, index) => {
+    const isActive = index === currentSlide;
+
+    const content = document.createElement("div");
+    content.className = `
+      max-w-4xl transition-opacity duration-500 
+      ${isActive ? "opacity-100 relative" : "opacity-0 absolute top-0"}
+    `;
+
+    content.innerHTML = `
+      <div class="${isActive ? "translate-y-0 opacity-100" : "translate-y-12 opacity-0"} 
+        transition-all duration-1000 ease-out">
+        <div class="inline-flex items-center px-4 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/20 
+        text-amber-400 font-bold text-xs tracking-wider uppercase mb-8">
+          <span class="w-2 h-2 rounded-full bg-amber-500 mr-2 animate-pulse"></span>
+          ${slide.subtitle}
+        </div>
+      </div>
+
+      <h1 class="text-5xl font-extrabold tracking-tight text-white mb-8 leading-tight">
+        <div class="transition-all duration-1000 ${isActive ? "translate-y-0 opacity-100" : "translate-y-16 opacity-0"}">
+          ${slide.title}
+        </div>
+        <div class="transition-all duration-1000 delay-150 ${isActive ? "translate-y-0 opacity-100" : "translate-y-16 opacity-0"}">
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-amber-400 to-amber-500">
+            ${slide.highlight}
+          </span>
+        </div>
+      </h1>
+
+      <p class="transition-all duration-1000 delay-300 text-xl text-slate-300 mb-12 leading-relaxed max-w-2xl border-l-4 border-amber-500 pl-6 py-2 rounded-r-lg
+        ${isActive ? "translate-y-0 opacity-100" : "translate-y-12 opacity-0"}">
+        ${slide.description}
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-5 transition-all duration-1000 delay-500 
+        ${isActive ? "translate-y-0 opacity-100" : "translate-y-12 opacity-0"}">
+
+        <a href="#" class="group flex items-center justify-center px-8 py-4 text-base font-bold rounded-full text-white 
+           bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 transition-all">
+          Explore Courses
+          <i data-lucide="arrow-right" class="ml-2 w-5 h-5"></i>
+        </a>
+
+        <a href="#" class="group flex items-center justify-center px-8 py-4 text-base font-bold rounded-full text-white border border-white/20 
+           bg-white/5 backdrop-blur-sm hover:bg-white/10 hover:border-amber-400/50 transition-all">
+          <div class="w-8 h-8 rounded-full bg-white text-slate-900 flex items-center justify-center mr-3">
+            <i data-lucide="play" class="w-3.5 h-3.5"></i>
+          </div>
+          Virtual Tour
+        </a>
+
+      </div>
+    `;
+
+    contentContainer.appendChild(content);
+  });
+
+  lucide.createIcons();
+}
+
+// ------------------ SLIDE LOGIC ------------------
+function showSlide(index) {
+  const slides = document.querySelectorAll(".slide");
+  const imgs = document.querySelectorAll(".slide-img");
+
+  slides.forEach((slide, i) => {
+    slide.style.opacity = i === index ? "1" : "0";
+    slide.style.zIndex = i === index ? "10" : "0";
+  });
+
+  imgs.forEach((img, i) => {
+    img.style.transform = i === index ? "scale(1.10)" : "scale(1.00)";
+  });
+
+  currentSlide = index;
+  renderSlideContent();
+}
+
+// ------------------ AUTOPLAY ------------------
+setInterval(() => {
+  if (isAutoPlaying) {
+    showSlide((currentSlide + 1) % SLIDES.length);
+  }
+}, 6000);
+
+// ------------------ BUTTON EVENTS ------------------
+document.getElementById("nextBtn").addEventListener("click", () => {
+  isAutoPlaying = false;
+  showSlide((currentSlide + 1) % SLIDES.length);
+});
+
+document.getElementById("prevBtn").addEventListener("click", () => {
+  isAutoPlaying = false;
+  showSlide((currentSlide - 1 + SLIDES.length) % SLIDES.length);
+});
+
+// Init slider
+renderSlides();
+</script>
+   
+    <!-- <div class="bg-slate-950 border-t border-slate-800 ">
+        <div class="flex items-stretch overflow-hidden">
+          
+          <div class="relative z-20 shrink-0 bg-amber-500 py-4 px-6 flex items-center justify-center shadow-[4px_0_24px_rgba(245,158,11,0.2)]">
+            <div class="flex items-center gap-3">
+              <span class="relative flex h-3 w-3">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-3 w-3 bg-white"></span>
+              </span>
+              <span class="font-extrabold text-white tracking-wider text-xs sm:text-sm uppercase">Updates</span>
+            </div>
+            {/* Slanted edge */}
+            <div class="absolute top-0 bottom-0 right-0 translate-x-1/2 w-6 bg-amber-500 transform -skew-x-12 z-[-1]"></div>
+          </div>
+
+          <div class="relative z-10 shrink-0 w-12 bg-slate-900 flex items-center justify-center -skew-x-12  border-l border-slate-800">
+            <i data-lucide="Megaphone" class="w-4 h-4 text-amber-500 skew-x-12" ></i>
+          </div>
+          <div class="flex-1 overflow-hidden py-4 flex items-center relative bg-slate-950">
+            <div class="absolute left-0 top-0 bottom-0 w-12 bg-linear-to-r from-slate-950 to-transparent z-10"></div>
+            <div class="absolute right-0 top-0 bottom-0 w-12 bg-linear-to-l from-slate-950 to-transparent z-10"></div>
+
+            <div class="animate-marquee flex items-center">
+             
+                <div  class="flex items-center whitespace-nowrap px-8 group cursor-pointer">
+                  <span class="w-1.5 h-1.5 rounded-full bg-slate-700 mr-4 group-hover:bg-amber-500 transition-colors duration-300"></span>
+                    <span class="mr-3 inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-bold bg-amber-500 text-white animate-pulse shadow-[0_0_10px_rgba(245,158,11,0.5)]">
+                      NEW
+                    </span>
+                  
+                  
+                  <a href="" target="_blank" rel="noopener" class="text-sm font-medium text-slate-400 group-hover:text-amber-400 transition-colors duration-300 tracking-wide">
+                    ACAP (Spot Round) Notice for BCA First Year 
+                  </a>
+                </div>
+             <div  class="flex items-center whitespace-nowrap px-8 group cursor-pointer">
+                  <span class="w-1.5 h-1.5 rounded-full bg-slate-700 mr-4 group-hover:bg-amber-500 transition-colors duration-300"></span>
+                    <span class="mr-3 inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-bold bg-amber-500 text-white animate-pulse shadow-[0_0_10px_rgba(245,158,11,0.5)]">
+                      NEW
+                    </span>
+                  
+                  
+                  <a href="" target="_blank" rel="noopener" class="text-sm font-medium text-slate-400 group-hover:text-amber-400 transition-colors duration-300 tracking-wide">
+                    Institutional Level Quota Notice For BCA First Year
+                  </a>
+                </div>
+            
+                 <div  class="flex items-center whitespace-nowrap px-8 group cursor-pointer">
+                  <span class="w-1.5 h-1.5 rounded-full bg-slate-700 mr-4 group-hover:bg-amber-500 transition-colors duration-300"></span>
+                    <span class="mr-3 inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-bold bg-amber-500 text-white animate-pulse shadow-[0_0_10px_rgba(245,158,11,0.5)]">
+                      NEW
+                    </span>
+                  
+                  
+                  <a href="" target="_blank" rel="noopener" class="text-sm font-medium text-slate-400 group-hover:text-amber-400 transition-colors duration-300 tracking-wide">
+                   Vacancy List For ACAP Round & Institutional Level Seats
+                  </a>
+                </div>
+            
+            </div>
+           
+          </div>
+          
+        </div>
+      </div> -->
+
+   <div class="grid grid-cols-1 md:grid-cols-3 md:grid-rows-3 gap-4 max-w-7xl mx-auto">
+
+    <!-- Main Story Box -->
+    <div class="md:col-span-2 md:row-span-2 bg-white p-6 border border-slate-200 rounded-xl flex flex-col transition-all duration-300 hover:shadow-xl hover:shadow-slate-400/10 hover:-translate-y-1">
+        <div class="flex items-center justify-center h-16 w-16 rounded-full bg-slate-100 text-slate-600 mb-4">
+            <i data-lucide="Handshake" class="w-8 h-8"></i>
+        </div>
+        <h3 class="text-2xl font-semibold text-slate-600 mb-4 flex items-center gap-3">About Us</h3>
+        <p class="text-slate-600 leading-relaxed mb-3">
+            MIT College of Computer Science and IT is situated in Basmath, a prominent town in the Hingoli district of Maharashtra. The college was established with the vision of providing quality education in the field of computer science and information technology to rural and semi-urban students. 
+        
+        
+            <p class="text-slate-600 leading-relaxed">
+It is  affiliated with Swami Ramanand Teerth Marathwada University, Nanded. Basmath enjoys good connectivity by road and rail to major cities in Maharashtra, making the college accessible to students from neighboring regions. The town holds cultural and historical significance in the Marathwada region. The MIT College campus is set in a peaceful environment that promotes learning and growth. Surrounded by greenery and thoughtfully designed infrastructure, the campus offers a serene and student-friendly atmosphere that encourages academic excellence and personal development. With a focus on discipline, innovation, and holistic education, MIT College is committed to nurturing skilled professionals and responsible citizens for the future.        </p>
+    </div>
+
+    <!-- Vision Box -->
+    <div class="md:col-span-1 md:row-span-2 bg-white p-6 border border-slate-200 rounded-xl flex flex-col justify-center transition-all duration-300 hover:shadow-xl hover:shadow-slate-400/10 hover:-translate-y-1">
+        <div class="flex items-center justify-center h-16 w-16 rounded-full bg-slate-100 text-slate-600 mx-auto mb-4">
+            <i data-lucide="School" class="w-8 h-8"></i>
+        </div>
+        <h3 class="text-xl font-bold text-slate-600 mb-2 text-center">Our Vision</h3>
+        <p class="text-slate-500 text-center">
+To be a leading and inclusive center of excellence in Computer Science and IT, empowering students—especially from rural and semi-urban backgrounds—with cutting-edge knowledge, innovation, and strong ethical values. We strive to nurture socially responsible, technically skilled professionals ready to drive positive change in a global, technology-driven world.        </p>
+    </div>
+
+    <!-- Mission Box -->
+    <div class="md:col-span-1 md:row-span-1 bg-white p-6 rounded-xl border border-slate-200 flex flex-col justify-center items-center text-center transition-all duration-300 hover:shadow-xl hover:shadow-slate-400/10 hover:-translate-y-1">
+        <div class="flex items-center justify-center h-16 w-16 rounded-full bg-slate-100 text-slate-600 mb-4">
+            <i data-lucide="Target" class="w-10 h-10"></i>
+        </div>
+        <h3 class="text-xl font-bold text-slate-600 mb-2">Our Mission</h3>
+        <p class="text-slate-500 text-sm">
+            To establish and manage exemplary educational institutions that provide holistic development.
+        </p>
+    </div>
+
+    <!-- Values Box -->
+    <div class="md:col-span-1 md:row-span-1 bg-white p-6 rounded-xl border border-slate-200 flex flex-col justify-center items-center text-center transition-all duration-300 hover:shadow-xl hover:shadow-slate-400/10 hover:-translate-y-1">
+        <div class="flex items-center justify-center h-16 w-16 rounded-full bg-slate-100 text-slate-600 mb-4">
+            <i data-lucide="BookOpen" class="w-10 h-10"></i>
+        </div>
+        <h3 class="text-xl font-bold text-slate-600 mb-2">Our Values</h3>
+        <p class="text-slate-500 text-sm">
+            Excellence, Integrity, Inclusivity, and student-centric learning.
+        </p>
+    </div>
+
+    <!-- Approach Box -->
+    <div class="md:col-span-1 md:row-span-1 bg-white p-6 rounded-xl border border-slate-200 flex flex-col justify-center items-center text-center transition-all duration-300 hover:shadow-xl hover:shadow-slate-400/10 hover:-translate-y-1">
+        <div class="flex items-center justify-center h-16 w-16 rounded-full bg-slate-100 text-slate-600 mb-4">
+            <i data-lucide="Compass" class="w-10 h-10"></i>
+        </div>
+        <h3 class="text-xl font-bold text-slate-600 mb-2">Our Approach</h3>
+        <p class="text-slate-500 text-sm">
+            Hands-on learning, mentorship, and a focus on real-world application.
+        </p>
+    </div>
+
+</div>
+</body>
+</html>

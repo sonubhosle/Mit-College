@@ -37,7 +37,7 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="py-24 bg-white relative overflow-hidden">
+    <section id="contact" className="py-24 bg-slate-100 relative overflow-hidden">
       {/* Modern Background Gradients (Amber/Slate Theme) */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
          <div className="absolute top-[-10%] right-[-5%] w-[800px] h-[800px] bg-amber-200/30 rounded-full blur-[120px] mix-blend-multiply animate-pulse"></div>

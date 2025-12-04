@@ -5,7 +5,7 @@ import SectionHeading from '../components/SectionHeading/SectionHeading';
 const About = () => {
     return (
         <section id="story" className="py-20">
-            <div className="container mx-auto px-5 ">
+            <div className=" px-5 ">
 
                 <SectionHeading
                     subtitle="Our Story"
